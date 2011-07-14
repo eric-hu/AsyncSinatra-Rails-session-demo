@@ -1,8 +1,8 @@
 Hello from rails
 
 %br
-Contents of session (Rails):
-- session.each do |s|
-  %br
-  = s
-  
+Contents of Rails' session:
+!=session.to_yaml.gsub(/\n/, "<br>") if session
+%br
+Contents of Sinatra's session
+!=@sinatra_session.to_yaml.gsub /\n/, "<br>" if @sinatra_session

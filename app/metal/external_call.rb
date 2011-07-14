@@ -6,11 +6,13 @@ class ExternalCall < Sinatra::Base
   #    :secret => Rails.application.config.secret_token
   
   use ActionDispatch::Session::CookieStore
+  #enable :sessions
 
   register Sinatra::Async  
 
   get '/sinatra/local' do
-    session[:demo] = "sinatra can write to Rails' session"
+    session[:demo] = "sinatra can write to Rails' session for synchronous requests"
+    redirect '/'
   end
 
   aget '/sinatra/goog' do
