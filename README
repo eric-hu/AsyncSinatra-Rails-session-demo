@@ -7,3 +7,8 @@ http://stackoverflow.com/questions/6688985/async-sinatra-in-rails-async-actions-
 to run this app, use Thin:
 
 rails server thin
+
+pages of interest:
+localhost/  #Rails
+localhost/sinatra/local  #Sinatra
+localhost/sinatra/goog   #Sinatra sending an Asynchronous request to Google
