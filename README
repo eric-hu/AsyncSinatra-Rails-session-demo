@@ -1,4 +1,9 @@
 This is just a demo project for a StackOverflow question, to demonstrate an
 issue I have with making asynchronous calls to outside the application.  For
-more detail, please see the question:
+a more detailed explanation, please see the question:
 
+http://stackoverflow.com/questions/6688985/async-sinatra-in-rails-async-actions-cant-write-to-shared-session
+
+to run this app, use Thin:
+
+rails server thin

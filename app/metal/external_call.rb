@@ -1,6 +1,10 @@
 class ExternalCall < Sinatra::Base
+  #  This is just another way of specifying Sinatra's session in a way that'll
+  #  be the same as Rails'.  The ActionDispatch line below is a slightly less
+  #  verbose method.
   #  use Rack::Session::Cookie, :key => '_session_id',
   #    :secret => Rails.application.config.secret_token
+  
   use ActionDispatch::Session::CookieStore
 
   register Sinatra::Async  
