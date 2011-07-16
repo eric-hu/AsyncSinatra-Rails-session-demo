@@ -11,7 +11,7 @@ class ExternalCall < Sinatra::Base
   register Sinatra::Async  
 
   get '/sinatra/local' do
-    session[:demo] = "sinatra can write to Rails' session for synchronous requests"
+    session[:async_call]="Async-sinatra wrote this"
     redirect '/'
   end
 
@@ -19,7 +19,7 @@ class ExternalCall < Sinatra::Base
     session[:async_call]="async sinatra calls cannot write to Rails' session"
     make_async_req :get, "http://www.google.com/" do |http_callback|
       if http_callback
-        session[:em_callback] = "this also isn't saving for me" 
+        session[:em_callback] = "Async-sinatra wrote this after an external HTTP request"
       else
         headers 'Status' => '422'
       end
@@ -27,7 +27,8 @@ class ExternalCall < Sinatra::Base
 
     end
   end
-  
+
+
 
   helpers do
     def make_async_req(method, host, opts={}, &block)
