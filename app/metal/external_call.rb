@@ -1,23 +1,24 @@
 class ExternalCall < Sinatra::Base
-  #  This is just another way of specifying Sinatra's session in a way that'll
-  #  be the same as Rails'.  The ActionDispatch line below is a slightly less
-  #  verbose method.
-  #  use Rack::Session::Cookie, :key => '_session_id',
-  #    :secret => Rails.application.config.secret_token
-  
-  use ActionDispatch::Session::CookieStore
+#  use ActionDispatch::Session::CookieStore
+
 
   register Sinatra::Async  
 
-  get '/sinatra/local' do
+
+  # use Sinatra's default session, which stores under the key "rack.session"
+  # instead of "_session_id" like Rails uses
+  enable :sessions
+
+  aget '/sinatra/local' do
     session[:demo] = "sinatra can write to Rails' session"
   end
 
   aget '/sinatra/goog' do
-    session[:async_call]="async sinatra calls cannot write to Rails' session"
-    make_async_req :get, "http://www.google.com/" do |http_callback|
+    debugger
+    session[:async_call]="Async-sinatra wrote this"
+    make_async_req :get, "http://www.google.com/a" do |http_callback|
       if http_callback
-        session[:em_callback] = "this also isn't saving for me" 
+        session[:em_callback] = "Async-sinatra wrote this after an external HTTP request"
       else
         headers 'Status' => '422'
       end
@@ -32,8 +33,14 @@ class ExternalCall < Sinatra::Base
       opts[:head] = { 'Accept' => 'text/html', 'Connection' => 'keep-alive' }
       http = EM::HttpRequest.new(host)
       http = http.send(method, {:head => opts[:head], :body => {}, :query => {}})
+      
       http.callback &block
+      http.errback {|err| puts "Request failed :(\nReturn data: #{err}"}
     end
+  
+
+  
   end
+
 
 end

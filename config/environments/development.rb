@@ -1,9 +1,9 @@
 RailsEMtest::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
+  # Settings specified here will take precedence over those in
+  # config/application.rb
 
   config.threadsafe!
-  # config.allow_concurrency = true
-  # config.preload_frameworks = true
+  # config.allow_concurrency = true config.preload_frameworks = true
 
   # Code is not reloaded between requests
   config.cache_classes = false
@@ -12,12 +12,11 @@ RailsEMtest::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Disable Rails's static asset server (Apache or nginx will already do this)
+  config.serve_static_assets = true
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
-
-  # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
